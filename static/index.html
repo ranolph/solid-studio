@@ -6,7 +6,7 @@
   <meta name="description" content="Build, join and cut real 3D solids. A private, self-hosted modelling studio for 3D printing.">
   <title>Solid Studio</title>
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=20261119-interface">
 </head>
 <body>
 <svg class="icon-defs" aria-hidden="true"><defs>
@@ -56,17 +56,17 @@
   <button class="button quiet compact" data-action="new" title="Start a new design"><svg><use href="#i-add"/></svg><span>New</span></button>
   <button class="button quiet compact" data-action="projects"><svg><use href="#i-folder"/></svg><span>Projects</span></button>
   <button class="button quiet compact" data-action="import"><svg><use href="#i-import"/></svg><span>Import</span></button>
-  <button class="button quiet icon-only" data-action="help" aria-label="Help and shortcuts"><svg><use href="#i-help"/></svg></button>
+  <button class="button quiet icon-only" data-action="help" aria-label="Info" title="Info"><svg><use href="#i-help"/></svg></button>
   <span class="header-divider header-secondary"></span>
-  <button class="button secondary compact" data-action="save"><svg><use href="#i-save"/></svg><span>Save</span></button>
-  <button class="button primary" data-action="export"><svg><use href="#i-download"/></svg><span>Export</span></button>
+  <button class="button secondary compact" data-action="save" aria-label="Save"><svg><use href="#i-save"/></svg><span>Save</span></button>
+  <button class="button primary" data-action="export" aria-label="Export"><svg><use href="#i-download"/></svg><span>Export</span></button>
 </header>
 
 <nav class="mobile-nav" aria-label="Workspace panels"><button data-panel="shapes" class="active">Shapes</button><button data-panel="canvas">3D view</button><button data-panel="inspector">Inspector</button></nav>
 <main class="workspace">
   <aside class="left-panel panel" id="shapes-panel" aria-label="Shapes and objects">
     <section class="palette-section">
-      <div class="panel-heading"><h2>Shapes</h2><span class="eyebrow">BUILD SOMETHING</span></div>
+      <div class="panel-heading"><h2>Shapes</h2></div>
       <label class="search-field"><svg><use href="#i-search"/></svg><input id="shape-search" placeholder="Find a shape…" aria-label="Find a shape"></label>
       <div class="shape-grid" id="shape-grid"></div>
     </section>
@@ -127,6 +127,6 @@
 <dialog id="modal" class="modal"><header><div><span class="eyebrow" id="modal-eyebrow">SOLID STUDIO</span><h2 id="modal-title"></h2></div><button class="button quiet icon-only" data-action="closeModal" aria-label="Close dialog"><svg><use href="#i-close"/></svg></button></header><div id="modal-content"></div></dialog>
 <input id="file-import" type="file" accept=".stl,.json" hidden>
 <div class="toast-stack" id="toasts" aria-live="polite"></div>
-<script type="module" src="/app.js"></script>
+<script type="module" src="/app.js?v=20261119-interface"></script>
 </body>
 </html>
