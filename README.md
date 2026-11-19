@@ -146,26 +146,6 @@ The integration supports the open-access, `trusted_lan` Layer Library API. URLs 
 
 Project JSON is limited to 20 MiB, 256 total objects and 24 nested operations. Imported meshes are limited to 250,000 total input triangles per project; evaluated output is capped at 750,000 triangles. STL files and Layer transfers are limited to 40 MiB. Geometry/browser limits may be lower to keep editing responsive; oversized/invalid input is rejected with an error, never silently substituted with a different model.
 
-## Publishing your own GitHub repository
-
-Extract the clean source ZIP and upload its contents to the repository root. Include `.github/`, `.gitignore`, `.dockerignore` and `.env.example` as well as the visible files and folders; GitHub Actions needs `.github/workflows/test.yml`. Do not upload a live `data/` directory, `.env`, database backups or personal models. The source archive contains none of those.
-
-[docs/PUBLISHING.md](docs/PUBLISHING.md) provides browser upload steps, Git commands and release packaging instructions. The project is MIT-licensed, so other people can use, modify and self-host it subject to the included licence and third-party notices. The footer links to [ranolph's GitHub profile](https://github.com/ranolph).
-
-## Development and verification
-
-```sh
-python3 -m unittest discover -s tests -p '*_test.py'
-node --test tests/*_test.mjs
-python3 tools/package.py --output ./release
-```
-
-The optional `npm run dev` command runs `preview.py` on port 3000 and uses a separate sibling `qa-solid/preview-data` directory unless `DATA_DIR` is set. It is a development preview. For the actual self-hosted service, use `server.py` or the container, and explicitly choose a persistent data directory/volume.
-
-GitHub Actions runs the Python and vendored JavaScript tests using Python 3.12 and Node 22 on an AMD64 Ubuntu 24.04 runner. A separate CI job builds the container on that runner. Neither job claims an ARM64 or live TrueNAS execution test.
-
-The package command creates a source ZIP, embedded TrueNAS installer, quickstart and SHA-256 checksums. It includes the bundled geometry engine and dependency licences while excluding runtime data, caches and development dependencies. Docker-image/TrueNAS execution needs those environments; local Python/geometry tests do not prove a live NAS deployment. The full WebGL renderer could not be visually verified in the build environment; browser checks there use the software view.
-
 API details are in [docs/API.md](docs/API.md). Dependencies and their licences are recorded in `THIRD_PARTY_NOTICES.md` and the bundled vendor licence files.
 
 [GitHub · ranolph](https://github.com/ranolph)
