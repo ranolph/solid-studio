@@ -1,0 +1,78 @@
+name: Test and build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Test Python server and installer
+        run: python -m unittest discover -s tests -p '*_test.py'
+      - name: Test bundled geometry and editor logic
+        run: node --test tests/*_test.mjs
+      - name: Verify release packaging
+        run: |
+          python tools/package.py --output /tmp/solid-studio-release
+          python /tmp/solid-studio-release/install_solid_studio.py --dry-run --root /tmp/solid-studio-ci/app
+
+  container:
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Build AMD64 container image
+        run: docker build --tag solid-studio:ci .
+      - name: Check container health and persistent data
+        run: |
+          docker volume create solid-studio-ci-data
+          trap 'docker rm -f solid-studio-ci 2>/dev/null || true; docker volume rm solid-studio-ci-data 2>/dev/null || true' EXIT
+          docker run -d --name solid-studio-ci --read-only --tmpfs /tmp:rw,nosuid,nodev,size=16777216,mode=1777 --cap-drop ALL --security-opt no-new-privileges --mount source=solid-studio-ci-data,target=/data solid-studio:ci
+          docker exec -i solid-studio-ci python - <<'PY'
+          import json, time, urllib.request
+          for attempt in range(40):
+              try:
+                  result = json.load(urllib.request.urlopen('http://127.0.0.1:8080/api/health', timeout=2))
+                  assert result['ok'] and result['service'] == 'solid-studio'
+                  break
+              except (OSError, ValueError):
+                  time.sleep(0.25)
+          else:
+              raise SystemExit('Container did not become healthy')
+          document = {'format':'solid-studio','version':1,'name':'CI persistence check','objects':[],'settings':{}}
+          request = urllib.request.Request('http://127.0.0.1:8080/api/projects', data=json.dumps({'project':document}).encode(), headers={'Content-Type':'application/json','X-Solid-Studio':'1'})
+          saved = json.load(urllib.request.urlopen(request, timeout=10))
+          assert saved['project']['document'] == document
+          PY
+          docker restart solid-studio-ci
+          docker exec -i solid-studio-ci python - <<'PY'
+          import json, time, urllib.request
+          for attempt in range(40):
+              try:
+                  result = json.load(urllib.request.urlopen('http://127.0.0.1:8080/api/projects', timeout=2))
+                  break
+              except (OSError, ValueError):
+                  time.sleep(0.25)
+          else:
+              raise SystemExit('Restarted container did not respond')
+          assert len(result['projects']) == 1 and result['projects'][0]['name'] == 'CI persistence check'
+          PY

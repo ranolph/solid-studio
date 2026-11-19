@@ -1,0 +1,33 @@
+services:
+  solid-studio:
+    build:
+      context: .
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
+    image: local/solid-studio:1.2.0
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${SOLID_STUDIO_PORT:-8788}:8080"
+    environment:
+      DATA_DIR: /data
+      LAYER_LIBRARY_URL: ${LAYER_LIBRARY_URL:-}
+    volumes:
+      - solid_studio_data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=16777216,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 512m
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
+volumes:
+  solid_studio_data:

@@ -1,0 +1,17 @@
+{
+  "name": "solid-studio",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "description": "A self-hosted 3D solid modeller for printable parts",
+  "scripts": {
+    "dev": "python3 preview.py",
+    "test": "node --test tests/*_test.mjs && python3 -m unittest discover -s tests -p '*_test.py'",
+    "vendor": "node tools/vendor.mjs"
+  },
+  "dependencies": {
+    "manifold-3d": "3.5.5",
+    "three": "0.187.0"
+  },
+  "license": "MIT"
+}
