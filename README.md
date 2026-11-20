@@ -1,30 +1,36 @@
 # Solid Studio
 
-**Version 1.2.0 · MIT-licensed · Self-hosted**
+**Version 1.2.0 · White interface update 2026-11-20 v3 · MIT-licensed · Self-hosted**
 
 A self-hosted browser workspace for building 3D-printable objects from editable shapes. Solid Studio runs on your server; the 3D view and solid geometry calculations run in the browser. The packaged app includes its JavaScript and WebAssembly dependencies, so normal modelling needs no CDN, cloud account, AI service or GPU in the server.
 
 ## Screenshots
 
-These screenshots use built-in starting designs and demonstration shapes, shown with the software 3D preview.
+These screenshots show the white interface update using built-in starting designs and demonstration shapes. White panels, cards, controls and dialogs sit against a very pale coral backdrop. Neutral graphite text, a white build plane and neutral lighting keep the workspace clear, with small coral selection and focus accents drawn from the Solid Studio icon. On mobile, the GitHub credit sits at the end of the page, below the full workspace and its controls.
 
 ### Shape, combine and edit
 
-![Solid Studio workspace showing a desktop organiser, the shape palette, editable objects and solid modelling controls.](docs/screenshots/solid-studio-workspace.jpg)
+![Solid Studio's white panels and pale coral backdrop showing a desktop organiser, the shape palette, editable objects and solid modelling controls.](docs/screenshots/solid-studio-workspace.jpg)
 
 Build printable objects from simple shapes, combine solids and cuts, and return to their source parts whenever you need to make a change.
 
 ### Fit a part to an opening
 
-![Fit to hole dialog showing opening measurements, fitted dimensions, printing clearance and automatic centring.](docs/screenshots/solid-studio-fit-to-hole.jpg)
+![White Fit to hole dialog showing opening measurements, fitted dimensions, printing clearance and automatic centring.](docs/screenshots/solid-studio-fit-to-hole.jpg)
 
 Resize an insert to an opening, choose printing clearance and centre it automatically. **Fill exactly** is available for matching profiles that need zero clearance.
 
 ### Adjust each capsule end
 
-![Capsule model with independently adjustable top and bottom curvature controls in the inspector.](docs/screenshots/solid-studio-capsule-controls.jpg)
+![Capsule model on a white build plane with independently adjustable top and bottom curvature controls in the white inspector.](docs/screenshots/solid-studio-capsule-controls.jpg)
 
 Adjust each capsule end independently while keeping the overall dimensions fixed.
+
+### Mobile workspace
+
+<img src="docs/screenshots/solid-studio-mobile.jpg" alt="Solid Studio's white interface on a phone, with the GitHub link below the complete workspace and controls" width="390">
+
+Switch between Shapes, 3D view and Inspector. The author link stays at the bottom of the page.
 
 ## Modelling
 

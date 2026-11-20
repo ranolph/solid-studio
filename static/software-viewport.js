@@ -170,21 +170,21 @@ export class SoftwareViewport {
   _drawBed() {
     if (!this.gridVisible) return;
     const h = this.gridSize / 2, project = (x, y, z = -.12) => this._project(new THREE.Vector3(x, y, z));
-    this._path([project(-h, -h), project(h, -h), project(h, h), project(-h, h)], '#f5f2ec', '#d7d6cd', 1);
+    this._path([project(-h, -h), project(h, -h), project(h, h), project(-h, h)], '#ffffff', '#d2d2d2', 1);
     const step = this.gridSize <= 350 ? 10 : this.gridSize <= 1200 ? 25 : 100;
     for (let x = Math.ceil(-h / step) * step; x <= h; x += step) {
-      const color = x === 0 ? '#c7cbc5' : '#e0e0d6';
+      const color = x === 0 ? '#c8c8c8' : '#e6e6e6';
       this._path([project(x, -h), project(x, h)], null, color, .65); this._path([project(-h, x), project(h, x)], null, color, .65);
     }
     const label = project(0, -h - 7);
-    this.context.font = '12px system-ui,sans-serif'; this.context.textAlign = 'center'; this.context.fillStyle = '#8a938a';
+    this.context.font = '12px system-ui,sans-serif'; this.context.textAlign = 'center'; this.context.fillStyle = '#858890';
     this.context.fillText(`${this.gridSize} × ${this.gridSize} mm`, label.x, label.y);
     const meshes = this.resultEnabled ? [this.resultMesh].filter(Boolean) : [...this.meshes.values()];
     for (const mesh of meshes) {
       if (mesh.userData.hole) continue;
       const bounds = new THREE.Box3().setFromObject(mesh, true), center = bounds.getCenter(new THREE.Vector3()), size = bounds.getSize(new THREE.Vector3());
       const shadow = Array.from({ length: 32 }, (_, i) => { const angle = i * Math.PI / 16; return project(center.x + Math.cos(angle) * size.x * .52, center.y + Math.sin(angle) * size.y * .52); });
-      this._path(shadow, 'rgba(71,68,57,.055)');
+      this._path(shadow, 'rgba(48,50,55,.045)');
     }
   }
   _faces(mesh) {
@@ -248,7 +248,7 @@ export class SoftwareViewport {
     ctx.setLineDash([3, 3]);
     for (let i = 0; i < 8; i++) for (const axis of [1, 2, 4]) if (!(i & axis)) this._path([corners[i], corners[i | axis]], null, '#b7775fa6', .9);
     ctx.setLineDash([]);
-    const size = bounds.getSize(new THREE.Vector3()); ctx.font = '500 12px system-ui,sans-serif'; ctx.fillStyle = '#788473'; ctx.textAlign = 'left';
+    const size = bounds.getSize(new THREE.Vector3()); ctx.font = '500 12px system-ui,sans-serif'; ctx.fillStyle = '#686b73'; ctx.textAlign = 'left';
     ctx.fillText(size.toArray().map(n => Number(n.toFixed(2))).join(' × ') + ' mm', 18, this._height - 64);
   }
   _handleLength() {
@@ -276,7 +276,7 @@ export class SoftwareViewport {
         ctx.font = '600 11px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.fillText('XYZ'[axis], end.x, end.y - 10);
         this.handles.push({ axis, points: [p, end], center: center.clone(), direction: direction.clone(), length });
       }
-      ctx.fillStyle = '#fffaf2'; ctx.strokeStyle = '#8d9b84'; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#8a8d95'; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       if (this.mode === 'scale') this.handles.push({ axis: -1, points: [p, p], center: center.clone(), length });
     }
   }
@@ -285,7 +285,7 @@ export class SoftwareViewport {
     const axes = AXES.map((axis, i) => ({ i, v: axis.clone().applyQuaternion(q) })).sort((a, b) => a.v.z - b.v.z);
     for (const { i, v } of axes) {
       const end = { x: x + v.x * 25, y: y - v.y * 25 }; ctx.globalAlpha = v.z < 0 ? .5 : 1;
-      this._path([{ x, y }, end], null, AXIS_COLORS[i], 1.5); ctx.beginPath(); ctx.arc(end.x, end.y, 9, 0, 2 * Math.PI); ctx.fillStyle = '#f5f4ec'; ctx.fill();
+      this._path([{ x, y }, end], null, AXIS_COLORS[i], 1.5); ctx.beginPath(); ctx.arc(end.x, end.y, 9, 0, 2 * Math.PI); ctx.fillStyle = '#ffffff'; ctx.fill();
       ctx.fillStyle = AXIS_COLORS[i]; ctx.font = '600 11px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.fillText('XYZ'[i], end.x, end.y + 4);
     }
     ctx.globalAlpha = 1;

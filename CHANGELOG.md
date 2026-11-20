@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-20 v3 — White interface update
+
+- Use pure white panels, cards, buttons, dialogs and utility blocks, with neutral graphite text and light grey borders.
+- Replace the darker coral workspace gradient with a flat, nearly white coral backdrop. Keep coral accents small and limited to focus and selection indicators.
+- Remove warm lighting and cream build planes from both 3D renderers: use a white bed, neutral lighting and light grey grid while retaining model colours, axes, geometry and dimension-label positions.
+- Retain the mobile page footer after the complete workspace and the shared Studio layout.
+- Refresh the README screenshots to show the white interface.
+
+## 2026-11-20 v2 — Coral interface update
+
+- Give the workspace, panels, controls, dialogs and mobile navigation a soft coral tint matching the Solid Studio icon, with readable neutral and coral text.
+- Move the existing GitHub credit to a page footer after the complete workspace on mobile; retain its familiar desktop position.
+- Keep the shared Studio header, panel spacing, model colours and existing renderer behaviour.
+- Refresh the README screenshots to show the updated interface.
+
 ## 1.2.0
 
 - Centre a fitted part in the selected opening by default, with a Fill exactly preset for all dimensions and zero clearance. Separate placement remains available.

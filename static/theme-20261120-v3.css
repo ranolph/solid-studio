@@ -1,0 +1,217 @@
+/* Solid Studio · white interface with a subtle coral backdrop · 2026-11-20 v3
+ * Loaded after style.css. Keep model colours, geometry and shared layout intact.
+ */
+:root {
+  color-scheme: light;
+  --ink: #303237;
+  --muted: #686b73;
+  --line: #e6e6e9;
+  --panel: #ffffff;
+  --accent: #d38c78;
+  --accent-soft: #fff5f1;
+  --green: #686b73;
+  --coral-page: #fdf5f2;
+  --coral-field: #ffffff;
+  --coral-hover: #fafafa;
+  --coral-active: #ffffff;
+  --coral-label: #686b73;
+  --coral-strong: #303237;
+  --coral-focus: #cf8c78;
+  color: var(--ink);
+  background: var(--coral-page);
+}
+
+body { background: var(--coral-page); }
+::selection { background: #f8e2d9; color: var(--ink); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline-color: var(--coral-focus);
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='m3 4.5 3 3 3-3' fill='none' stroke='%23686b73' stroke-width='1.3'/%3E%3C/svg%3E");
+}
+
+/* Shared shell dimensions and gutters are supplied by style.css. */
+.app-header {
+  background: var(--panel);
+  border-color: #e6e6e9;
+  box-shadow: 0 4px 14px #30323706;
+}
+.header-divider, .tool-divider, .thin-line { background: var(--line); }
+.project-title input { color: var(--coral-label); }
+.project-title input:hover, .project-title input:focus { background: var(--coral-hover); }
+.project-title input:focus { box-shadow: 0 1px 0 #cf8c78; }
+.panel { border-color: var(--line); box-shadow: 0 5px 18px #30323707; }
+.quiet, .button.quiet { background: #ffffff; color: var(--coral-label); }
+.quiet:hover, .button.quiet:hover { background: var(--coral-hover); color: var(--ink); }
+.secondary { background: #ffffff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.secondary:hover { background: #fafafa; }
+.primary { background: var(--ink); color: #ffffff; box-shadow: 0 2px 3px #30323712; }
+.primary:hover { background: #464850; }
+.danger { background: #ffffff; color: #a1493e; }
+.eyebrow, .small-muted, .object-type, .part-badge,
+.version-label, .empty-list, .build-badge { color: var(--muted); }
+
+/* Shape palette and editable object list. Coloured object swatches are untouched. */
+.search-field { border-color: var(--line); background: var(--coral-field); }
+.search-field svg, .search-field input::placeholder { color: var(--muted); }
+.shape-grid, .inspector-content { scrollbar-color: #d9d9df transparent; }
+.shape-card {
+  border-color: #e6e6e9;
+  background: #ffffff;
+  color: var(--coral-label);
+}
+.shape-card:hover {
+  background: var(--coral-hover);
+  border-color: #d9d9df;
+  box-shadow: 0 3px 8px #3032370c;
+}
+.shape-card .add-sign { color: var(--coral-strong); }
+.count { background: var(--coral-field); color: var(--muted); }
+.object-row, .object-row > span.object-name { color: var(--coral-label); }
+.object-row:hover { background: var(--coral-field); }
+.object-row.selected { background: #ffffff; border-color: #e0c2b8; color: var(--ink); box-shadow: inset 2px 0 0 var(--accent); }
+.object-row.selected > span.object-name { color: var(--coral-strong); }
+.object-row .tiny-button { color: var(--muted); }
+.object-row .tiny-button:hover { background: #fafafa; color: var(--coral-strong); }
+.object-row.locked .object-name:after, .object-list .empty-list, .left-footer a { color: var(--muted); }
+
+/* Both WebGL and software canvases are transparent over this backdrop. */
+.viewport {
+  background: var(--coral-page);
+}
+.stage-title, .unit-tag, .stage-footer { color: var(--muted); }
+.mini-logo { background: #ffffff; color: var(--coral-strong); }
+.toolbar {
+  background: #ffffff;
+  border-color: #e6e6e9;
+  box-shadow: 0 4px 16px #3032370c;
+}
+.tool-button, .toolbar select, .display-switch > button { background-color: #ffffff; color: var(--coral-label); }
+.tool-button:hover:not(:disabled) { background: var(--coral-hover); color: var(--coral-strong); }
+.tool-button.active { background: #ffffff; color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+.display-switch > button.active {
+  background: #ffffff;
+  color: var(--coral-strong);
+  box-shadow: 0 1px 5px #30323715;
+}
+.plane-cut-button { background: var(--coral-active); color: var(--coral-strong); }
+.plane-cut-button:hover:not(:disabled) { background: #fafafa; }
+.navigation-hint b { color: #b2b3ba; }
+.footer-button { color: var(--muted); }
+.footer-button[aria-pressed=true] { color: var(--coral-strong); }
+.loading-state { background: #ffffff; color: var(--coral-label); box-shadow: 0 4px 24px #30323712; }
+.spinner { border-color: #e6e6e9; border-top-color: var(--accent); }
+.stage-message { color: #686b73; border-color: #e6e6e9; background: #ffffff; box-shadow: 0 3px 9px #30323710; }
+.geometry-error { color: #a1493e; border-color: #e7b4a8; background: #ffffff; }
+.empty-state h1 { color: var(--coral-label); }
+.empty-state p, .edit-context { color: var(--muted); }
+.empty-cube { background: var(--coral-active); color: #8a8d95; }
+.software-badge { color: #686b73; background: #ffffff; border-color: #e6e6e9; }
+.solid-selection-measure {
+  /* Inline positioning belongs to the renderer, including the local spacing fix. */
+  color: var(--coral-label) !important;
+  background: #ffffff !important;
+}
+
+/* Inspector, dimensions, options and print result. */
+.inspector-empty { color: var(--muted); }
+.inspector-empty svg { color: #8a8d95; }
+.object-title-field input { border-bottom-color: var(--line); }
+.role-toggle { background: #fafafa; }
+.role-toggle button { background: #ffffff; color: var(--coral-label); }
+.role-toggle button.active { color: var(--coral-strong); background: #ffffff; box-shadow: 0 1px 4px #3032371c; }
+.inspector-section h3, .end-control > label { color: var(--coral-label); }
+.inspector-section h3 span { color: var(--muted); }
+.number-field > span { color: var(--coral-label); }
+.number-field input, .field-input {
+  border-color: var(--line);
+  background: var(--coral-field);
+  color: var(--ink);
+}
+.number-field input:focus, .field-input:focus { background: #ffffff; border-color: var(--coral-focus); }
+/* Axis colours retain their functional distinction from the app tint. */
+.number-field.axis-x > span { color: #a45d50; }
+.number-field.axis-y > span { color: #427d76; }
+.number-field.axis-z > span { color: #6c70a2; }
+.color-swatch.active { outline-color: var(--coral-strong); }
+.section-help { color: var(--muted); }
+.group-actions { background: var(--coral-field); }
+.group-actions .button { color: var(--coral-strong); }
+.operation-select { border-color: var(--line); background-color: var(--coral-field); color: var(--coral-label); }
+.multi-select-message { color: var(--coral-label); }
+.inspector-tools .button { background: var(--coral-field); color: var(--coral-strong); }
+.inspector-tools .button:hover { background: var(--coral-hover); }
+.print-summary { border-top-color: var(--line); background: #ffffff; }
+.summary-title, .print-summary > strong, .library-button { color: var(--coral-strong); }
+.summary-meta { color: var(--coral-label); }
+.print-summary > p { color: var(--muted); }
+.result-check { color: var(--coral-strong); background: var(--coral-active); }
+.result-check.warning { color: #8a5a20; background: #ffffff; }
+.library-button { border-color: #e6e6e9; }
+.end-control input[type=range], .checkbox-line input { accent-color: #cf8c78; }
+.fit-measurements { background: var(--coral-field); border-color: var(--line); }
+.fit-measurements span { color: var(--coral-label); }
+.fit-measurements strong { color: var(--coral-strong); }
+
+/* Every dialog uses the same palette, including fit/export/projects/settings. */
+.modal { background: var(--panel); border-color: #ffffff; box-shadow: 0 25px 100px #30323724; }
+.modal::backdrop { background: #30323733; }
+.modal p, .help-steps { color: var(--coral-label); }
+.modal .field-input { color: var(--ink); background: var(--coral-field); border-color: var(--line); }
+.modal .field-input:focus { background: #ffffff; border-color: var(--coral-focus); }
+.modal label, .modal .field-grid .number-field > span { color: var(--coral-label); }
+.modal .field-help, .modal .muted-note { color: var(--muted); }
+.starter-card { border-color: var(--line); background: var(--coral-field); }
+.starter-card svg { color: #8a8d95; }
+.starter-card strong { color: var(--coral-strong); }
+.starter-card small { color: var(--muted); }
+.starter-card:hover { border-color: #d9d9df; background: var(--coral-hover); }
+.project-row { border-bottom-color: var(--line); }
+.project-row small { color: var(--muted); }
+.shortcut-list, .modal .shortcut-list { color: var(--coral-label); }
+kbd { background: var(--coral-field); border-color: var(--line); color: var(--coral-label); }
+.help-steps strong, .align-grid > .axis-label { color: var(--coral-strong); }
+.toast { background: #ffffff; color: var(--coral-label); border-color: #ffffff; box-shadow: 0 6px 30px #30323725; }
+.toast.error { border-color: #e7b4a8; background: #ffffff; color: #a1493e; }
+.export-preview, .export-library-details { background: var(--coral-field); border-color: var(--line); }
+.export-preview strong { color: var(--coral-strong); }
+.export-preview p { color: var(--muted); }
+.muted-note, .modal .muted-note { color: var(--muted) !important; }
+.limit-note { background: #ffffff; color: #8a5a20 !important; }
+.inline-section-label { color: var(--coral-label); }
+.modal-error { color: #a1493e; background: #ffffff; }
+
+.stage-github { color: var(--muted); border-bottom-color: #d9a493; }
+.stage-github:hover { color: var(--ink); border-bottom-color: currentColor; }
+.studio-page-footer { display: none; }
+
+/* Neutral white utility blocks; colour is reserved for small state indicators. */
+.plane-cut-note, .hole-note { background: #ffffff; border-color: var(--line); color: var(--muted); }
+.plane-cut-note h3 { color: var(--ink); }
+.role-ball.hole { border-color: #b4b6bc; background: repeating-linear-gradient(135deg, #f0f0f2 0 3px, #b4b6bc 3px 4px); }
+.object-row.hole .object-dot { background: repeating-linear-gradient(135deg, #f0f0f2 0 3px, #b4b6bc 3px 4px) !important; }
+.result-check { box-shadow: inset 0 0 0 1px var(--line); }
+.plane-cut-button { box-shadow: inset 0 0 0 1px var(--line); }
+.inspector-tools .button { box-shadow: inset 0 0 0 1px var(--line); }
+
+@media (max-width: 860px) {
+  body { height: auto; min-height: 100dvh; overflow-x: hidden; overflow-y: auto; }
+  .mobile-nav { background: var(--panel); border-color: #e6e6e9; box-shadow: 0 3px 13px #30323710; }
+  .mobile-nav button { background: #ffffff; color: var(--coral-label); }
+  .mobile-nav button.active { background: #ffffff; color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+  .studio-page-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    padding: 5px 12px max(14px, env(safe-area-inset-bottom));
+  }
+  .studio-page-footer .stage-github { margin: 0; font-size: 12px; }
+}
+
+@media (max-width: 500px) {
+  .workspace .left-panel { box-shadow: 8px 0 28px #30323725; }
+  .workspace[data-mobile-panel=inspector] .right-panel { box-shadow: -8px 0 28px #30323725; }
+  .view-toolbar select { color: transparent; }
+  .view-toolbar select option { color: var(--coral-label); }
+}

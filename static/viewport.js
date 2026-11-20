@@ -137,7 +137,7 @@ export class Viewport {
     this.renderer.toneMappingExposure = 1.3;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.renderer.setClearColor('#f0ede7', 0);
+    this.renderer.setClearColor('#fdf5f2', 0);
     this.canvas = this.renderer.domElement;
     this.canvas.className = 'solid-viewport-canvas';
     this.canvas.setAttribute('aria-label', '3D modelling workspace. Drag to orbit, scroll to zoom, right-drag to pan. Click a shape to select it.');
@@ -206,9 +206,9 @@ export class Viewport {
     });
     this.transform.addEventListener('change', () => this.requestRender());
 
-    this.scene.add(new THREE.HemisphereLight('#fffaf2', '#abb3cd', 2.25));
+    this.scene.add(new THREE.HemisphereLight('#ffffff', '#b8b8b8', 2.25));
     this.scene.add(new THREE.AmbientLight('#ffffff', .48));
-    this.keyLight = new THREE.DirectionalLight('#fff3e7', 3.25);
+    this.keyLight = new THREE.DirectionalLight('#ffffff', 3.25);
     this.keyLight.position.set(-100, -140, 270);
     this.keyLight.castShadow = true;
     this.keyLight.shadow.mapSize.set(2048, 2048);
@@ -218,10 +218,10 @@ export class Viewport {
     this.keyLight.shadow.bias = -.00015;
     this.keyLight.shadow.radius = 2.5;
     this.scene.add(this.keyLight, this.keyLight.target);
-    const fill = new THREE.DirectionalLight('#dfe4ff', 1.6);
+    const fill = new THREE.DirectionalLight('#ffffff', 1.6);
     fill.position.set(140, 30, 140);
     this.scene.add(fill);
-    const rim = new THREE.DirectionalLight('#fff9fb', 1.2);
+    const rim = new THREE.DirectionalLight('#ffffff', 1.2);
     rim.position.set(30, 150, 200);
     this.scene.add(rim);
     this.bedGroup = new THREE.Group();
@@ -310,7 +310,7 @@ export class Viewport {
     const half = size / 2;
     const bed = new THREE.Mesh(
       new THREE.PlaneGeometry(size, size),
-      new THREE.MeshStandardMaterial({ color: '#f4f2ee', roughness: 1, metalness: 0, side: THREE.DoubleSide })
+      new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1, metalness: 0, side: THREE.DoubleSide })
     );
     bed.position.z = -.12;
     bed.receiveShadow = true;
@@ -321,7 +321,7 @@ export class Viewport {
       const positions = Math.abs(value) < .001 ? major : minor;
       positions.push(value, -half, -.08, value, half, -.08, -half, value, -.08, half, value, -.08);
     }
-    for (const [points, color, opacity] of [[minor, '#c9c8c5', .42], [major, '#b5b8b8', .75]]) {
+    for (const [points, color, opacity] of [[minor, '#dedede', .42], [major, '#c8c8c8', .75]]) {
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
       this.bedGroup.add(new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity })));
@@ -330,8 +330,8 @@ export class Viewport {
       new THREE.Vector3(-half, -half, -.07), new THREE.Vector3(half, -half, -.07),
       new THREE.Vector3(half, half, -.07), new THREE.Vector3(-half, half, -.07)
     ]);
-    this.bedGroup.add(new THREE.LineLoop(border, new THREE.LineBasicMaterial({ color: '#b9bab7', transparent: true, opacity: .6 })));
-    this._bedLabel = this._textSprite(`${size} × ${size} mm`, '#8a8f8b', 11);
+    this.bedGroup.add(new THREE.LineLoop(border, new THREE.LineBasicMaterial({ color: '#d2d2d2', transparent: true, opacity: .6 })));
+    this._bedLabel = this._textSprite(`${size} × ${size} mm`, '#858890', 11);
     this._bedLabel.position.set(0, -half - 8, .1);
     this.bedGroup.add(this._bedLabel);
     this._setShadowBounds(size);
@@ -374,7 +374,7 @@ export class Viewport {
     this.host.append(this.axisCanvas);
     this.measureLabel = document.createElement('div');
     this.measureLabel.className = 'solid-selection-measure';
-    Object.assign(this.measureLabel.style, { position: 'absolute', bottom: '58px', left: '16px', color: '#737b78', font: '500 12px system-ui,sans-serif', pointerEvents: 'none', zIndex: '1', padding: '5px 8px', borderRadius: '7px', background: 'rgba(250,249,246,.85)', display: 'none' });
+    Object.assign(this.measureLabel.style, { position: 'absolute', bottom: '58px', left: '16px', color: '#686b73', font: '500 12px system-ui,sans-serif', pointerEvents: 'none', zIndex: '1', padding: '5px 8px', borderRadius: '7px', background: 'rgba(255,255,255,.92)', display: 'none' });
     this.host.append(this.measureLabel);
   }
 
@@ -393,7 +393,7 @@ export class Viewport {
       context.lineWidth = 3;
       context.globalAlpha = axis.direction.z < -.1 ? .45 : .95;
       context.beginPath(); context.moveTo(90, 90); context.lineTo(x, y); context.stroke();
-      context.fillStyle = '#f8f7f3';
+      context.fillStyle = '#ffffff';
       context.beginPath(); context.arc(x, y, 14, 0, 2 * Math.PI); context.fill();
       context.fillStyle = axis.color;
       context.font = '600 19px system-ui,sans-serif';
@@ -401,7 +401,7 @@ export class Viewport {
       context.fillText(axis.label, x, y + 1);
     }
     context.globalAlpha = 1;
-    context.fillStyle = '#9fa7a3';
+    context.fillStyle = '#92959c';
     context.beginPath(); context.arc(90, 90, 4, 0, Math.PI * 2); context.fill();
   }
 
